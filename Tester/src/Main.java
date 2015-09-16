@@ -12,22 +12,41 @@ public class Main {
 		System.out.println("The number of queens determine the size of the board");
 		System.out.println("For example 9 queens create a board thats 9x9");
 		
-		try{
+		
 		Scanner kb = new Scanner(System.in);
 		userInput = kb.nextInt();
-		}catch{Exception e}
+	
+		int totalSolutions = solve(userInput);
 		
-		solve(userIntput);
+		System.out.println("THe number of solututions for " + userInput + " is " + totalSolutions);
 		
 	}
 	
-	public static void solve(int numbOfQueens)
+	public static int solve(int numbOfQueens)
 	{
+		Boolean moreSolutions = true
+				
+				while(moreSolutions)
+				{
+					
+				}
 		
+		return number;
 	}
 	public static void printBoard(Stack<Integer> solution)
 	{
-		for
+		for(int i = 0; i <= solution.size(); i++)
+		{
+			for(int j = 0; j < solution.size();j++)
+			{
+				if( j == solution.get(i))
+					System.out.print("Q");
+				else
+					System.out.print("* ");
+			}
+			System.out.println();
+		}
+		System.out.println();
 	}
 }
 
