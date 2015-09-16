@@ -2,7 +2,11 @@ import java.util.Scanner;
 import java.util.Stack;
 
 public class Main {
-	Stack<Integer> solutionStack = new Stack<Integer>();
+	
+	//Stack used to hold the solutions that are pushed to the stack
+		Stack<Integer> solutionStack = new Stack<Integer>();
+	
+	//Main method for interaction with user to get the number of Queens used for game.
 	
 	public static void main(String[] args)
 	{
@@ -22,9 +26,12 @@ public class Main {
 		
 	}
 	
+	/*Method to solve problem. Using a Boolean value themethod will continue to search for possible solutions
+	 * until all possible solutions are found
+	 */
 	public static int solve(int numbOfQueens)
 	{
-		Boolean moreSolutions = true
+		Boolean moreSolutions = true;
 				
 				while(moreSolutions)
 				{
@@ -33,6 +40,11 @@ public class Main {
 		
 		return number;
 	}
+	
+	
+	/* Using the solution stack this method prints the board using a Q to represent the queen and a * to represent the 
+	 * an empty square
+	 */
 	public static void printBoard(Stack<Integer> solution)
 	{
 		for(int i = 0; i <= solution.size(); i++)
