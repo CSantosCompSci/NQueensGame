@@ -1,0 +1,2 @@
+# NQueensGame
+Queens game problem
