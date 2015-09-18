@@ -33,48 +33,83 @@ public class Main {
 	public static int solve(int numOfQueens)
 	{
 		int numOfSolutions = 0;
-		Boolean solution = true;
-		Boolean noMoreSolutions;
-		while(noMoreSolutions)
+		int filled = 0;
+		int columnNumber = 0;
+		boolean noMoreSolutions =false;
+		solutionStack.push(columnNumber);
+		System.out.println("Exit 1");
+		while(noMoreSolutions )
 		{	
-				int Queen = 0;
-				for(int index = 0; index < numOfQueens; index ++)
+			for(int j = 0; j < numOfQueens; j++)
+			{
+				if(solutionStack.size() == numOfQueens && filled == numOfQueens)
 				{
-					if(solutionStack.empty()== true)
-						solutionStack.push(index)
-					else if(solutionStack.get(Queen) == Queen)
-						solution = false;
-						break;
-						else if(solutionStack.get(index) == 
-						solution = true;
-						break;
-					}
-					if (solutionStack.empty() == true)
-					{
-						solutionStack.push(i);
-					}
-					else if(solutionStack.)
-					
-				}
-			printBoard(solutionStack);
-			
-		}
-		return number;
-	}
-	
+					System.out.println("Exit 2");
 
-	
+					numOfSolutions++;
+					printBoard(solutionStack);
+					noMoreSolutions = false;
+				}else
+				if (solutionSpace(solutionStack, columnNumber) == true)
+				{
+					System.out.println("Exit 3");
+
+					solutionStack.push(columnNumber);
+					filled++;
+				}else
+				if(solutionSpace(solutionStack, columnNumber) == false)
+				{
+					System.out.println("Exit 4");
+
+					solutionStack.push(solutionStack.pop()+1);
+					filled--;
+				}
+						
+				
+				else 
+				{
+					columnNumber++;
+				}
+			}
+		}
+		System.out.println("Exit 1");
+		
+		return numOfSolutions;
+	}
+
+	// Boolean solution that returns true if space is a valid anwser. False for when it is not a solution space.
+
+	public static boolean solutionSpace(Stack<Integer> workingStack, int columnNumber)
+	{
+		
+			Boolean isSolution  = false;
+			int rowNumber  = workingStack.peek();
+		
+				if(rowNumber == columnNumber)
+				{
+					isSolution = false;
+				}
+				else if(Math.abs(rowNumber- columnNumber) == Math.abs(rowNumber - solutionStack.size()))
+				{
+				isSolution = false;
+				}
+				else
+				{
+					isSolution = true;
+				}
+			return isSolution;
+	}
 	/* Using the solution stack this method prints the board using a Q to represent the queen and a * to represent the 
 	 * an empty square
 	 */
 	public static void printBoard(Stack<Integer> solution)
 	{
-		for(int i = 0; i <= solution.size(); i++)
+		for(int i = 0; i < solution.size(); i++)
 		{
 			for(int j = 0; j < solution.size();j++)
 			{
 				if( j == solution.get(i))
-					System.out.print("Q");
+					System.out.print("Q ");
 				else
 					System.out.print("* ");
 			}
