@@ -37,37 +37,42 @@ public class Main {
 		int columnNumber = 0;
 		boolean noMoreSolutions =false;
 		solutionStack.push(columnNumber);
-		System.out.println("Exit 1");
-		while(noMoreSolutions != true)
+		System.out.println(solutionStack.toString());
+		while(columnNumber < numOfQueens)
 			{
-			for(columnNumber = 0; columnNumber < numOfQueens; columnNumber ++)
-			{
-				if(solutionStack.size() == numOfQueens && filled == numOfQueens)
+			
+				if(solutionStack.size() == numOfQueens  )//filled == numOfQueens)
 				{
 					System.out.println("Exit 2");
 
 					numOfSolutions++;
 					printBoard(solutionStack);
-					noMoreSolutions = true;
+					//noMoreSolutions = true;
 				}else
 				if (solutionSpace(solutionStack, columnNumber) == true)
 				{
 					System.out.println("Exit 3");
 					solutionStack.push(columnNumber);
+					System.out.println(solutionStack.toString());
+					System.out.println(solutionStack.size());
+					System.out.println("colNum = " +columnNumber);
+
 					filled++;
-					columnNumber = 0;
+					
 				}else
 				if(solutionSpace(solutionStack, columnNumber) == false)
 				{
 					System.out.println("Exit 4");
 					columnNumber++;
-					if(columnNumber == numOfQueens -1)
-					{
-						solutionStack.push(solutionStack.pop()+1);
-						filled--;
-					}
+					System.out.println("colNum = " +columnNumber);
+					System.out.println(solutionStack.peek());
+					solutionStack.push(solutionStack.pop()+1);
+					System.out.println("Stack after pop " + solutionStack.toString());
+
+					filled--;
+					
 				}
-			}
+			
 		}
 		System.out.println("Exit 1");
 		
@@ -81,19 +86,29 @@ public class Main {
 		
 			Boolean isSolution  = false;
 			int rowNumber  = workingStack.peek();
-		
-				if(rowNumber == columnNumber)
+			for( int j = 0; j < workingStack.size(); j++)
+			{	
+				if(workingStack.get(j) == columnNumber)
 				{
-					isSolution = false;
+					System.out.println("j " + j);
+					System.out.println("colNum = " +columnNumber);
+					System.out.println(workingStack.get(j));
+					isSolution =  false;
+				
 				}
-				else if(Math.abs(rowNumber- columnNumber) == Math.abs(rowNumber - solutionStack.size()))
+				else if(Math.abs(workingStack.get(j)- j ) == Math.abs(columnNumber -j))
 				{
-				isSolution = false;
+					System.out.println(Math.abs(rowNumber- columnNumber) + "hello"+Math.abs(rowNumber - solutionStack.size()) );
+					isSolution = false;
+					
 				}
 				else
 				{
 					isSolution = true;
+				
 				}
+			}
+			System.out.println(isSolution);
 			return isSolution;
 	}
 	/* Using the solution stack this method prints the board using a Q to represent the queen and a * to represent the 
