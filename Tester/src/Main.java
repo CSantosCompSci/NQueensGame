@@ -38,9 +38,9 @@ public class Main {
 		boolean noMoreSolutions =false;
 		solutionStack.push(columnNumber);
 		System.out.println("Exit 1");
-		while(noMoreSolutions )
-		{	
-			for(int j = 0; j < numOfQueens; j++)
+		while(noMoreSolutions != true)
+			{
+			for(columnNumber = 0; columnNumber < numOfQueens; columnNumber ++)
 			{
 				if(solutionStack.size() == numOfQueens && filled == numOfQueens)
 				{
@@ -48,27 +48,24 @@ public class Main {
 
 					numOfSolutions++;
 					printBoard(solutionStack);
-					noMoreSolutions = false;
+					noMoreSolutions = true;
 				}else
 				if (solutionSpace(solutionStack, columnNumber) == true)
 				{
 					System.out.println("Exit 3");
-
 					solutionStack.push(columnNumber);
 					filled++;
+					columnNumber = 0;
 				}else
 				if(solutionSpace(solutionStack, columnNumber) == false)
 				{
 					System.out.println("Exit 4");
-
-					solutionStack.push(solutionStack.pop()+1);
-					filled--;
-				}
-						
-				
-				else 
-				{
 					columnNumber++;
+					if(columnNumber == numOfQueens -1)
+					{
+						solutionStack.push(solutionStack.pop()+1);
+						filled--;
+					}
 				}
 			}
 		}
