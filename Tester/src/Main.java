@@ -38,98 +38,49 @@ public class Main {
 		solutionStack.push(columnNumber);
 		while(!noMoreSolutions)
 			{
-				System.out.println("stack = " + solutionStack.size());
-				System.out.println();
-
-				for(int j = 0; j < solutionStack.size(); j++)
-				{
-					System.out.println("For loop");
-					System.out.println("j = " + j);
-					System.out.println("stack " + solutionStack.toString());
-					System.out.println("size " + solutionStack.size());
-					System.out.println("col = " +columnNumber);
-					System.out.println();
-
-					
-					if(solutionStack.get(j) == columnNumber)
-					{
-				
-						System.out.println("1st if");
-					System.out.println("j = " +	solutionStack.get(j));
-				
-					System.out.println("stack " + solutionStack.toString());
-					System.out.println("size " + solutionStack.size());
-					System.out.println("col = " + columnNumber);
-					columnNumber++;
-					System.out.println();
-					break;
-
-					}
-					 
-					if(Math.abs(solutionStack.get(j) - columnNumber) == Math.abs(j - solutionStack.size()))
-					{	
-					System.out.println("get j = " + solutionStack.get(j));
-					System.out.println("col = " + columnNumber);
-					System.out.println("j =" + j);
-					System.out.println("size = " + solutionStack.size());
-					System.out.println("rowdif = " + Math.abs(solutionStack.get(j) - columnNumber));
-					System.out.println("colDif = " + Math.abs(j - solutionStack.size()));
-					System.out.println("2nd if");
-					System.out.println("stack" + solutionStack.toString());
-					System.out.println("size " + solutionStack.size());
-					System.out.println("col = " +columnNumber);
-					columnNumber++;
-					break;
-					}
-					 if(columnNumber == numOfQueens)
-					{
-						columnNumber = solutionStack.pop() ;
-					
-					System.out.println("3rd if");
-					System.out.println("stack = " + solutionStack.toString());
-					System.out.println("size" + solutionStack.size());
-					System.out.println("col = " +columnNumber);
-					System.out.println();
-					}
 					if(solutionStack.size() == numOfQueens)
 					{
 						numOfSolutions++;
-						printBoard(solutionStack);
-					    columnNumber = solutionStack.pop() + 1 ;
-						System.exit(1);
-						
+						printBoard();
+						columnNumber = backTrack(numOfQueens);
 					}
 					if(solutionStack.isEmpty() && columnNumber == numOfQueens)
-					 	noMoreSolutions = true;
-					if(solutionStack.get(j) != columnNumber && Math.abs(solutionStack.get(j) - columnNumber) != Math.abs(j - solutionStack.size()))
 					{
-					
-						System.out.println("else");
-						System.out.println("stack " +solutionStack.toString());
-						System.out.println("size " +solutionStack.size());
-						System.out.println(columnNumber);
-						System.out.println();
-
+						noMoreSolutions = true;
+					}
+					if(isValid(columnNumber))
+					{
 						solutionStack.push(columnNumber);
 						columnNumber = 0;
-						break;
+						System.out.println(solutionStack.toString());
 					}
-					else 
-					columnNumber++;
-				}
+					
+					if(!isValid(columnNumber))
+					{
+						System.out.println(solutionStack.toString());
+						System.out.println(columnNumber);
+						columnNumber++;
+						
+						if(columnNumber == numOfQueens)
+						{
+							columnNumber = backTrack(numOfQueens);
+						
+						}
+					}
+					
 			}
 			return numOfSolutions;
 	}
 	/* Using the solution stack this method prints the board using a Q to represent the queen and a * to represent the 
 	 * an empty square
 	 */
-	public static void printBoard(Stack<Integer> solution)
+	public static void printBoard()
 	{
-		for(int i = 0; i < solution.size(); i++)
+		for(int i = 0; i < solutionStack.size(); i++)
 		{
-			for(int j = 0; j < solution.size();j++)
+			for(int j = 0; j < solutionStack.size();j++)
 			{
-				if( j == solution.get(i))
+				if( j == solutionStack.get(i))
 					System.out.print("Q ");
 				else
 					System.out.print("* ");
@@ -137,6 +88,37 @@ public class Main {
 			System.out.println();
 		}
 		System.out.println();
+	}
+	
+	
+	public static boolean isValid(int colNum)
+	{
+		boolean valid = true;
+		for(int i = 0 ; i < solutionStack.size(); i ++)
+		{
+	
+			if(solutionStack.get(i) == colNum || (Math.abs(solutionStack.get(i) - colNum) == Math.abs(i - solutionStack.size())))
+					valid = false;
+		}
+		return valid;
+		
+	}
+	public static int backTrack(int queens)
+	{
+		int number;
+		if(solutionStack.size()== 1 && solutionStack.get(0) == queens -1)
+		{	
+			number = solutionStack.pop() +1 ;
+			solutionStack.push(number );
+		}
+		else
+		{	
+			number = solutionStack.pop() +1 ;
+			if(number == queens)
+				number = solutionStack.pop() + 1;
+		}	
+		return number;
+		
 	}
 }
 
