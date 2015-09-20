@@ -44,7 +44,7 @@ public class Main {
 						printBoard();
 						columnNumber = backTrack(numOfQueens);
 					}
-					if(solutionStack.isEmpty() && columnNumber == numOfQueens)
+					if(solutionStack.isEmpty() && columnNumber == numOfQueens )
 					{
 						noMoreSolutions = true;
 					}
@@ -52,13 +52,11 @@ public class Main {
 					{
 						solutionStack.push(columnNumber);
 						columnNumber = 0;
-						System.out.println(solutionStack.toString());
+					
 					}
 					
 					if(!isValid(columnNumber))
 					{
-						System.out.println(solutionStack.toString());
-						System.out.println(columnNumber);
 						columnNumber++;
 						
 						if(columnNumber == numOfQueens)
@@ -105,18 +103,20 @@ public class Main {
 	}
 	public static int backTrack(int queens)
 	{
-		int number;
+		int number = 0;
 		if(solutionStack.size()== 1 && solutionStack.get(0) == queens -1)
 		{	
-			number = solutionStack.pop() +1 ;
-			solutionStack.push(number );
+			solutionStack.pop();
+			 return number = queens;
+		}
+		number = solutionStack.peek() ;
+		if(number == queens -1 )
+		{
+			solutionStack.pop();
+			number = solutionStack.pop()+1;
 		}
 		else
-		{	
-			number = solutionStack.pop() +1 ;
-			if(number == queens)
-				number = solutionStack.pop() + 1;
-		}	
+			number = solutionStack.pop()+1;
 		return number;
 		
 	}
